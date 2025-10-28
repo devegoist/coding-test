@@ -2,8 +2,8 @@ import java.util.*;
 
 class Solution {
     public int solution(String begin, String target, String[] words) {
-        int count = 0;
         Set<String> used = new HashSet<>();
+        int count = 0;
         
         Queue<Pair> queue = new  LinkedList<>();
         queue.offer(new Pair(begin, 0));
@@ -50,7 +50,7 @@ class Solution {
         
         public String getWord() {
             return word;
-        }
+        } 
         
         public int getDepth() {
             return depth;
