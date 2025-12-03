@@ -6,11 +6,7 @@ class Solution {
             
             Map<Character, Integer> map = new HashMap<>();
             for (char c : newWord.toCharArray()) {
-                if (!map.containsKey(c)) {
-                    map.put(c, 0);
-                }
-
-                map.put(c, map.get(c) + 1);
+                map.put(c, map.getOrDefault(c, 0) + 1);
             }
 
             Set<Integer> set = new HashSet<>();
