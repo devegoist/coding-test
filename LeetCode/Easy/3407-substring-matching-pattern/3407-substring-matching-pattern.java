@@ -1,15 +1,20 @@
 class Solution {
     public boolean hasMatch(String s, String p) {
-        String[] split = p.split("\\*", -1);
-        int length1 = split[0].length();
-        int length2 = 0;
+        int idx = p.indexOf("*");
 
-        int idx1 = s.indexOf(split[0]);
-        if (idx1 < 0) {
+        String left = p.substring(0, idx);
+        String right = p.substring(idx + 1);
+
+        int lIdx = s.indexOf(left);
+        if (lIdx == -1) {
             return false;
         }
 
-        s = s.substring(idx1 + length1);
-        return s.indexOf(split[1]) >= 0 ? true : false;
+        int rIdx = s.substring(lIdx + left.length()).indexOf(right);
+        if (rIdx == -1) {
+            return false;
+        }
+
+        return true;
     }
 }
