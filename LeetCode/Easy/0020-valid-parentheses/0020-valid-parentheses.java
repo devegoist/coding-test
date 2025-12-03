@@ -7,28 +7,16 @@ class Solution {
         Stack<Character> stack = new Stack<>();
 
         for (char c : s.toCharArray()) {
-            switch (c) {
-                case '(':
-                case '{':
-                case '[':
-                    stack.push(c);
-                    break;
-                case ')':
-                case '}':
-                case ']':
-                    if (stack.isEmpty()) {
-                        return false;
-                    }
-
-                    char peek = stack.peek();
-                    if ((peek == '(' && c == ')')
-                            || (peek == '{' && c == '}')
-                            || (peek == '[' && c == ']')) {
-                                stack.pop();
-                    } else {
-                        return false;
-                    }
-                    break;
+            if ('(' == c) {
+                stack.push(')');
+            } else if ('{' == c) {
+                stack.push('}');
+            } else if ('[' == c) {
+                stack.push(']');
+            } else {
+                if (stack.isEmpty() || stack.pop() != c) {
+                    return false;
+                }
             }
         }
 
