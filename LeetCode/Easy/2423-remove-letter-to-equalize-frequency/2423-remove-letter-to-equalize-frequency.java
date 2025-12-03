@@ -1,23 +1,37 @@
 class Solution {
     public boolean equalFrequency(String word) {
-
         for (int i = 0; i < word.length(); i++) {
-            String newWord = word.substring(0, i) + word.substring(i + 1);
-            
-            Map<Character, Integer> map = new HashMap<>();
-            for (char c : newWord.toCharArray()) {
-                map.put(c, map.getOrDefault(c, 0) + 1);
+            int[] arr = new int[26];
+
+            for (int j = 0; j < word.length(); j++) {
+                if (i != j) {
+                    arr[word.charAt(j) - 'a']++;
+                }
             }
 
-            Set<Integer> set = new HashSet<>();
-            map.forEach((k, v) -> {
-                set.add(v);
-            });
-            
-            if (set.size() == 1) {
+            if (frequencyEquals(arr)) {
                 return true;
             }
         }
+
         return false;
+    }
+
+    private boolean frequencyEquals(int[] arr) {
+        int target = 0;
+        for (int num : arr) {
+            if (num > 0) {
+                target = num;
+                break;
+            }
+        }
+
+        for (int num : arr) {
+            if (num > 0 && target != num) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
