@@ -5,12 +5,19 @@ class Solution {
             map.put(n, map.getOrDefault(n, 0) + 1);
         }
 
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
-        list.sort((a, b) -> b.getValue() - a.getValue());
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
 
         int[] result = new int[k];
-        for (int i = 0; i < k; i++) {
-            result[i] = list.get(i).getKey();
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            pq.offer(entry);
+
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = pq.poll().getKey();
         }
 
         return result;
