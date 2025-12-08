@@ -1,9 +1,8 @@
 class Solution {
     public String frequencySort(String s) {
         Map<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            System.out.println(s.charAt(i));
-            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
         PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>((a, b) -> {
