@@ -5,18 +5,13 @@ class Solution {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>((a, b) -> {
-            return b.getValue() - a.getValue();
-        });
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            pq.offer(entry);
-        }
+        List<Map.Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
+        list.sort((a, b) -> b.getValue() - a.getValue());
 
         StringBuilder sb = new StringBuilder();
-        while (!pq.isEmpty()) {
-            Map.Entry<Character, Integer> poll = pq.poll();
-            for (int i = 0; i < poll.getValue(); i++) {
-                sb.append(poll.getKey());
+        for (Map.Entry<Character, Integer> entry: list) {
+            for (int i = 0; i < entry.getValue(); i++) {
+                sb.append(entry.getKey());
             }
         }
 
