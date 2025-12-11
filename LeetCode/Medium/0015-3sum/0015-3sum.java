@@ -10,7 +10,7 @@ class Solution {
             int left = i + 1;
             int right = nums.length - 1;
 
-            while (left != right) {
+            while (left != right && left < right) {
                 int b = nums[left];
                 int c = nums[right];
 
@@ -24,7 +24,10 @@ class Solution {
 
                 if (b + c > -a) {
                     right--;
+                } else if (b + c < -a) {
+                    left++;
                 } else {
+                    right--;
                     left++;
                 }
             }
