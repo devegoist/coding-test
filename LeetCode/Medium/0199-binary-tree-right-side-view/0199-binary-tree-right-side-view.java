@@ -25,20 +25,17 @@ class Solution {
 
         while (!q.isEmpty()) {
             int loopSize = q.size();
-            Stack<Integer> stack = new Stack<>();
             for (int i = 0; i < loopSize; i++) {
                 TreeNode node = q.poll();
-                stack.push(node.val);
+                if (i == loopSize - 1) {
+                    result.add(node.val);
+                }
                 if (node.left != null) {
                     q.offer(node.left);
                 }
                 if (node.right != null) {
                     q.offer(node.right);
                 }
-            }
-            
-            if (stack.size() > 0) {
-                result.add(stack.pop());
             }
         }
 
