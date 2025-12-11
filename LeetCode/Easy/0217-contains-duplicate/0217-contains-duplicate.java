@@ -16,7 +16,7 @@ class Solution {
         //     map.put(num, map.getOrDefault(num, 0) + 1);
         // }
 
-        Set<Integer> set = new HashSet<>();
+        Set<Integer> set = new HashSet<>(); // O(n)
         for (int num : nums) {
             if (!set.add(num)) {
                 return true;
