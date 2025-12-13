@@ -16,10 +16,10 @@ class Solution {
             return;
         }
 
-        backtrack(index + 1, current);
-
         current.add(nums[index]);
         backtrack(index + 1, current);
         current.remove(current.size() - 1);
+
+        backtrack(index + 1, current);
     }
 }
