@@ -2,6 +2,7 @@ class Solution {
     public int numIslands(char[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
+        
         boolean[][] visited = new boolean[m][n];
         int result = 0;
 
@@ -10,9 +11,10 @@ class Solution {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (visited[i][j] == false && grid[i][j] == '1') {
+                if (!visited[i][j] && grid[i][j] == '1') {
                     result++;
-                    bfs(grid, visited, i, j, dx, dy);
+                    visited[i][j] = true;
+                    dfs(grid, visited, i, j, dx, dy);
                 }
             }
         }
@@ -20,29 +22,18 @@ class Solution {
         return result;
     }
 
-    private void bfs(char[][] grid, boolean[][] visited, int startX, int startY, int[] dx, int[] dy) {
-        Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[]{startX, startY});
-        visited[startX][startY] = true;
-
-        while (!q.isEmpty()) {
-            int[] loc = q.poll();
-            int x = loc[0];
-            int y = loc[1];
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-
-                if (nx >= 0 
-                    && ny >= 0 
-                    && nx < grid.length 
-                    && ny < grid[0].length
-                    && !visited[nx][ny]
-                    && grid[nx][ny] == '1') {
-                    q.offer(new int[]{nx, ny});
+    private void dfs(char[][] grid, boolean [][] visited, int x, int y, int[] dx, int[] dy) {
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0
+                && ny >= 0
+                && nx < grid.length
+                && ny < grid[0].length
+                && !visited[nx][ny]
+                && grid[nx][ny] == '1') {
                     visited[nx][ny] = true;
-                }
+                    dfs(grid, visited, nx, ny, dx, dy);
             }
         }
     }
