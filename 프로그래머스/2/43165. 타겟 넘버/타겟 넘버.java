@@ -1,20 +1,14 @@
 class Solution {
-    private int[] numbers;
-    private int target;
-    private int[][] result;
-    private int count;
+    private int count = 0;
     
     public int solution(int[] numbers, int target) {
-        this.numbers = numbers;
-        this.target = target;
-        this.result = new int[numbers.length][numbers.length];
         
-        dfs(0, 0);
+        dfs(numbers, target, 0, 0);
         
         return count;
     }
     
-    private void dfs(int index, int sum) {
+    private void dfs(int[] numbers, int target, int index, int sum) {
         if (index == numbers.length) {
             if (sum == target) {
                 count++;
@@ -22,7 +16,7 @@ class Solution {
             return;
         }
         
-        dfs(index + 1, sum + numbers[index]);
-        dfs(index + 1, sum - numbers[index]);
+        dfs(numbers, target, index + 1, sum + numbers[index]);
+        dfs(numbers, target, index + 1, sum - numbers[index]);
     }
 }
