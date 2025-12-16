@@ -2,58 +2,45 @@ import java.util.*;
 
 class Solution {
     public int solution(String begin, String target, String[] words) {
-        Set<String> used = new HashSet<>();
-        int count = 0;
+        int answer = 0;
         
-        Queue<Pair> queue = new  LinkedList<>();
-        queue.offer(new Pair(begin, 0));
+        boolean[] visited = new boolean[words.length];
         
-        while(!queue.isEmpty()) {
-            Pair pair = queue.poll();
-            
-            if (pair.getWord().equals(target)) {
-                count = pair.getDepth();
-            }
-            
-            for (int i = 0; i < words.length; i++) {
-                if (!used.contains(words[i]) && canConvert(pair.getWord(), words[i])) {
-                    queue.offer(new Pair(words[i], pair.getDepth() + 1));
-                    used.add(words[i]);
+        Queue<String> q = new LinkedList<>();
+        q.offer(begin);
+        
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                String current = q.poll();
+                System.out.println(current + " " + answer);
+                if (current.equals(target)) {
+                    return answer;
+                }
+                
+                for (int j = 0; j < words.length; j++) {
+                    if (!visited[j] && canChange(current, words[j])) {
+                        visited[j] = true;
+                        q.offer(words[j]);
+                    }
                 }
             }
+            answer++;
         }
         
-        return count;
+        return 0;
     }
     
-    private boolean canConvert(String text, String word) {
+    private boolean canChange(String current, String word) {
+        int length = current.length();
         int count = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) != word.charAt(i)) {
-                count++;
+        for (int i = 0; i < length; i++) {
+            char c1 = current.charAt(i);
+            char c2 = word.charAt(i);
+            if (c1 != c2) {
+                count += 1;    
             }
         }
-        return count == 1;
-    }
-    
-    public class Pair {
-        private String word;
-        private int depth;
-        
-        public Pair() {
-        }
-        
-        public Pair(String word, int depth) {
-            this.word = word;
-            this.depth = depth;
-        }
-        
-        public String getWord() {
-            return word;
-        } 
-        
-        public int getDepth() {
-            return depth;
-        }
+        return count == 1 ? true : false;
     }
 }
