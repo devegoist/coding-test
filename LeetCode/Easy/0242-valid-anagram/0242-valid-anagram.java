@@ -4,32 +4,22 @@ class Solution {
             return false;
         }
 
-        Map<Character, Integer> map1 = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+        int[] map = new int[26];
 
-        for (Character c: s.toCharArray()) {
-            if (!map1.containsKey(c)) {
-                map1.put(c, 1);
-            }
-            map1.put(c, map1.get(c) + 1);
+        for (char c : s.toCharArray()) {
+            map[c - 'a'] += 1;
         }
 
-        for (Character c: t.toCharArray()) {
-            if (!map2.containsKey(c)) {
-                map2.put(c, 1);
-            }
-            map2.put(c, map2.get(c) + 1);
+        for (char c : t.toCharArray()) {
+            map[c - 'a'] -= 1;
         }
 
-        for (Map.Entry<Character, Integer> entry: map1.entrySet()) {
-            char key = entry.getKey();
-            int val = entry.getValue();
-            if (!(map2.containsKey(key) && val == map2.get(key))) {
-                
+        for (int m : map) {
+            if (m != 0) {
                 return false;
             }
         }
-
+        
         return true;
     }
 }
