@@ -2,7 +2,6 @@ class Solution {
     private int count = 0;
     public int countSubstrings(String s) {
         int length = s.length();
-        int len = 1;
 
         for (int i = 0; i < length; i++) {
             search(s, i, i);
