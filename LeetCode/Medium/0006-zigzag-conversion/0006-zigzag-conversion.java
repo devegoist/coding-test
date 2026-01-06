@@ -3,7 +3,7 @@ class Solution {
         if (numRows == 1) {
             return s;
         }
-        
+
         StringBuilder[] rows = new StringBuilder[numRows];
         for (int i = 0; i < numRows; i++) {
             rows[i] = new StringBuilder();
@@ -12,25 +12,25 @@ class Solution {
         int current = 0;
         boolean down = true;
 
-        for (String str: s.split("")) {
-            rows[current].append(str);
+        for (char c: s.toCharArray()) {
+            rows[current].append(c);
+
+            if (current == 0) {
+                down = true;
+            } else if (current == numRows - 1) {
+                down = false;
+            }
 
             if (down) {
-                current+=1;
-                if (current == numRows-1) {
-                    down = false;
-                }
+                current++;
             } else {
                 current--;
-                if (current == 0) {
-                    down = true;
-                }
             }
         }
 
         StringBuilder sb = new StringBuilder();
         for (StringBuilder row: rows) {
-            sb.append(row.toString());
+            sb.append(row);
         }
 
         return sb.toString();
