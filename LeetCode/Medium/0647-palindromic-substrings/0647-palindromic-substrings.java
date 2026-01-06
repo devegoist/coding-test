@@ -12,9 +12,10 @@ class Solution {
             }
         }
 
-        for (int i = 0; i < s.length()-2; i++) {
-            for (int j = i + 2; j < s.length(); j++) {
-                dp[i][j] = dp[i+1][j-1] && s.charAt(i) == s.charAt(j);
+        for (int len = 3; len <= s.length(); len++) {
+            for (int i = 0; i <= s.length()-len; i++) {
+                int j = i + len - 1;
+                dp[i][j] = dp[i+1][j-1] && (s.charAt(i) == s.charAt(j));
             }
         }
 
