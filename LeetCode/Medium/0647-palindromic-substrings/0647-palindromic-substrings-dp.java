@@ -20,7 +20,7 @@ class Solution {
         }
 
         for (int i = 0; i < s.length(); i++) {
-            for (int j = 0; j < s.length(); j++) {
+            for (int j = i; j < s.length(); j++) {
                 if (dp[i][j] == true) {
                     result+=1;
                 }
