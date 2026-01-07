@@ -4,7 +4,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             int diff = target - nums[i];
             if (map.containsKey(diff)) {
-                return new int[]{map.get(diff), i};
+                return new int[]{i, map.get(diff)};
             }
             map.put(nums[i], i);
         }
