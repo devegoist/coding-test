@@ -2,27 +2,18 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        Arrays.sort(participant);
-        Arrays.sort(completion);
-        
-        int i = 0;
-        int j = 0;
-        
-        String answer = participant[participant.length - 1];
-        
-        while (j < completion.length) {
-            String pName = participant[i];
-            String cName = completion[j];
-            
-            if (pName.equals(cName)) {
-                i++;
-                j++;
-            } else {
-                answer = pName;
-                break;
-            }
+        Map<String, Integer> map = new HashMap<>();
+        for (String player : completion) {
+            map.put(player, map.getOrDefault(player, 0) + 1);
         }
         
-        return answer;
+        for (String player: participant) {
+            Integer count = map.get(player);
+            if (count == null || count == 0) {
+                return player;
+            }
+            map.put(player, count -= 1);
+        }
+        return "";
     }
 }
