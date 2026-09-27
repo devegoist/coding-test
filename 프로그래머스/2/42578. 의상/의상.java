@@ -6,7 +6,7 @@ class Solution {
         
         for (String[] cloth: clothes) {
             if (!map.containsKey(cloth[1])) {
-                map.put(cloth[1], 1);
+                map.put(cloth[1], 0);
             }
             
             map.put(cloth[1], map.get(cloth[1]) + 1);
@@ -15,8 +15,8 @@ class Solution {
         
         int answer = 1;
         
-        for (String key: map.keySet()) {
-            answer *= map.get(key);
+        for (Integer value: map.values()) {
+            answer *= (value + 1);
         }
         
         return answer - 1;
