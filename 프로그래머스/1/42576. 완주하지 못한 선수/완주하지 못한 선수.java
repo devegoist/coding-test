@@ -3,17 +3,21 @@ import java.util.*;
 class Solution {
     public String solution(String[] participant, String[] completion) {
         Map<String, Integer> map = new HashMap<>();
-        for (String player : completion) {
-            map.put(player, map.getOrDefault(player, 0) + 1);
+        
+        for (String p: participant) {
+            map.put(p, map.getOrDefault(p, 0) + 1);
         }
         
-        for (String player: participant) {
-            Integer count = map.get(player);
-            if (count == null || count == 0) {
-                return player;
-            }
-            map.put(player, count -= 1);
+        for (String c: completion) {
+            map.put(c, map.get(c) - 1);
         }
+        
+        for (String name: map.keySet()) {
+            if (map.get(name) > 0) {
+                return name;
+            }
+        }
+        
         return "";
     }
 }
